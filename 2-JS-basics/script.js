@@ -242,7 +242,6 @@ var John = {
 var Mark = {
   fullName: "Mark Doe",
   bills: [77, 375, 110, 45],
-  //METHOD
   calcTips: function() {
     this.finalAmounts = [];
     this.tips = [];
@@ -264,7 +263,6 @@ var Mark = {
   }
 };
 
-// function
 function calcAverage(tips) {
   var averageTips;
   var totalTips = 0;
