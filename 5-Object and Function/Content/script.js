@@ -156,3 +156,90 @@ interviewQuestion("teacher")("Mark");
   console.log(score >= 7 - goodLuck);
 })(5);
 */
+
+// 7. Closure:
+/*
+function retirement(retirementAge) {
+  var a = " years left until retirement";
+  return function(yearOfBirth) {
+    var age = 2016 - yearOfBirth;
+    // this is closure here:
+    console.log(retirementAge - age + a);
+  };
+}
+
+var retirementUS = retirement(66);
+retirementUS(1999);
+
+// Rewriting the interviewQuestion function with closure:
+function interviewQuestion(job) {
+  return function(name) {
+    if (job === "designer") {
+      console.log(name + " can you please explain what UX design is ?");
+    } else if (job === "teacher") {
+      console.log("What subject do you teach , " + name + "?");
+    } else {
+      console.log("Hello " + name + ", What do you do ?");
+    }
+  };
+}
+
+var teach = interviewQuestion("teacher");
+teach("Trung");
+*/
+
+// 8. call, bind and apply function:
+// a. call:
+var john = {
+  name: "John",
+  age: 26,
+  job: "teacher",
+  presentation: function(style, timeOfDay) {
+    if (style === "formal") {
+      var stringGreeting =
+        "Good " +
+        timeOfDay +
+        ", Ladies" +
+        "and Gentelement. I'm " +
+        this.name +
+        ", I'm a " +
+        this.job +
+        " and I'm " +
+        this.age +
+        "years old.";
+      console.log(stringGreeting);
+    } else if (style === "friendly") {
+      var stringGreeting =
+        "What's up " +
+        timeOfDay +
+        ", Ladies" +
+        "and Gentelement. I'm " +
+        this.name +
+        ", I'm a " +
+        this.job +
+        " and I'm " +
+        this.age +
+        " years old.";
+      console.log(stringGreeting);
+    }
+  }
+};
+
+var emily = {
+  name: "Emily",
+  age: 35,
+  job: "designer"
+};
+
+john.presentation("formal", "afternoon");
+// this is call, or method borrowing:
+// this will display emily info
+john.presentation.call(emily, "friendly", "afternoon");
+
+//b. apply: apply is like call but
+// work only when the function takes array parameters
+// john.presentation.apply(emily, ['friendly', 'morning']);
+
+//c. bind:
+var emillyFriendly = john.presentation.bind(emily, "formal");
+emillyFriendly("night");

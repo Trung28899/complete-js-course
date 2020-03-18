@@ -64,3 +64,14 @@ outside code
     var score = Math.random() *10; 
     console.log(score >= 5 - goodLuck); 
 })(5); 
+
+7. Closure: 
+- An inner function has always access to the variable and
+parameters of its outer function, even after the outer 
+function has returned
+- This is possible because of scope chain
+- Understand scope chain and execution stack well 
+for this concept
+
+8. Method borrowing: call, apply and bind
+- See code example
