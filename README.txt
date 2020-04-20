@@ -13,6 +13,7 @@ conditional statements, boolean logic
 - Hoisting
 - this keyword, scope of variables
 - Execution Context, Scope Chain
+- Function borrowing
 
 4. DOM-pig game: 
 - DOM manipulation
