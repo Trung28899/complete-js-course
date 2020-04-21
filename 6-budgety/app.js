@@ -1,4 +1,33 @@
+  // data object that stores all the income, expenses, total income and total expenses
+  // available budget and percentage spent
+var data = {
+    allItems: {
+      exp: [],
+      inc: [],
+    },
+    totals: {
+      exp: 0,
+      inc: 0,
+    },
+    budget: 0,
+    percentage: -1,
+};
+
 // BUDGET CONTROLLER
+// THIS IS THE DATA HANDLER FOR THE APPLICATION doing the following jobs: 
+/*
+
+- Contains Expense and Income object
+- Calculate total income and expenses: calculateTotal()
+- Data structure to store all income, expenses, available budget and percentage income spent: data
+- Return methods to: 
++, Add items into data data structure: addItem()
++, Delete items from data data structure: deleteItem()
++, Calculate available budget: calculateBudget()
++, Calculate spent percentage of the income: calculatePercentages()
++, Methods to get percentage and budget: getPercentages(), getBudget()
+
+*/
 var budgetController = (function () {
   // Function constructor for object for expenses
   var Expense = function (id, description, value) {
@@ -40,33 +69,21 @@ var budgetController = (function () {
     data.totals[type] = sum;
   };
 
-  // data object that stores all the income, expenses, total income and total expenses
-  // available budget and percentage spent
-  var data = {
-    allItems: {
-      exp: [],
-      inc: [],
-    },
-    totals: {
-      exp: 0,
-      inc: 0,
-    },
-    budget: 0,
-    percentage: -1,
-  };
-
   return {
+      // Return function to add item to income or expense to data object
     addItem: function (type, des, val) {
       var newItem, ID;
 
       //[1 2 3 4 5], next ID = 6
       //[1 2 4 6 8], next ID = 9
-      // ID = last ID + 1
+      
 
       // Create new ID
       if (data.allItems[type].length > 0) {
+        // ID = last ID + 1
         ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
       } else {
+        // if no item, ID = 0  
         ID = 0;
       }
 
@@ -82,7 +99,7 @@ var budgetController = (function () {
 
       // Return the new element
       return newItem;
-    },
+    }, // END OF addItem function
 
     deleteItem: function (type, id) {
       var ids, index;
@@ -101,7 +118,7 @@ var budgetController = (function () {
       if (index !== -1) {
         data.allItems[type].splice(index, 1);
       }
-    },
+    }, // END OF deleteItem function
 
     calculateBudget: function () {
       // calculate total income and expenses
@@ -160,8 +177,15 @@ var budgetController = (function () {
 })();
 // End of Budget controller
 
-// UI CONTROLLER
+/*********************************************************
+ *********************************************************
+ *********************************************************
+ */
+
+// UI CONTROLLER: this is the page event / action handler of the app
+// User interface controller
 var UIController = (function () {
+    // string object that stores all the controllable classes
   var DOMstrings = {
     inputType: ".add__type",
     inputDescription: ".add__description",
@@ -178,6 +202,7 @@ var UIController = (function () {
     dateLabel: ".budget__title--month",
   };
 
+  // Function to format number to a readable format
   var formatNumber = function (num, type) {
     var numSplit, int, dec, type;
     /*
@@ -459,3 +484,4 @@ var controller = (function (budgetCtrl, UICtrl) {
 })(budgetController, UIController);
 
 controller.init();
+console.log(data); 
