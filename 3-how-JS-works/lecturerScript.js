@@ -2,13 +2,14 @@
 // Lecture: Hoisting
 
 /*
-// functions
+// Work with this: function declaration
 calculateAge(1965);
 
 function calculateAge(year) {
     console.log(2016 - year);
 }
 
+// Doesn't Work with this: function expression
 // retirement(1956);
 var retirement = function(year) {
     console.log(65 - (2016 - year));
@@ -27,12 +28,12 @@ function foo() {
 }
 foo();
 console.log(age);
+
 */
-
-
 
 /////////////////////////////////////
 // Lecture: Scoping
+
 
 /*
 // First scoping example
@@ -48,7 +49,6 @@ function first() {
         console.log(a + b + c);
     }
 }
-
 
 // Example to show the differece between execution stack and scope chain
 var a = 'Hello!';
@@ -78,7 +78,7 @@ function third() {
 
 
 //console.log(this);
-
+/*
 calculateAge(1985);
 
 function calculateAge(year) {
@@ -111,3 +111,4 @@ var mike = {
 mike.calculateAge = john.calculateAge;
 mike.calculateAge();
 
+*/

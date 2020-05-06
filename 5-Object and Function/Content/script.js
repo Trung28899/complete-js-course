@@ -46,7 +46,8 @@ var john = Object.create(personProto);
 john.name = "John";
 john.yearOfBirth = 1990;
 john.job = "teacher";
-// Then type john in console > enter
+console.log(john); 
+console.log(john.calculateAge()); 
 
 // 2nd way to inherit using Object.create
 var jane = Object.create(personProto, {
@@ -66,7 +67,7 @@ a = 46;
 console.log(a);
 console.log(b);
 
-// Object variable hold the data inside the variable itself
+// Object's variable hold the data inside the variable itself
 var obj1 = {
   name: "John",
   age: "26"
