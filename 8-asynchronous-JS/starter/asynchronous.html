@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Asynchronous JavaScript</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Asynchronous JavaScript</h1>
     <script>
-        /* 1st example
+      /* 1st example
         const second = () => {
             // 1st argument is action of the function
-            // 2nd argument is the time out of the funcitno in milliseconds. 
+            // 2nd argument is the time out of the fun citno in milliseconds. 
             setTimeout(() => {
                 console.log('Async Hey There'); 
             }, 2000);
@@ -31,7 +31,7 @@
         first(); 
         */
 
-        /* Example of CallBack Hell 
+      /* Example of CallBack Hell 
         Promises will solve this issue
         function getRecipe(){
             setTimeout(() => {
@@ -60,77 +60,234 @@
         getRecipe(); 
         */
 
-        // PROMISE IS AN OBJECT THAT 
-        // - KEEPS TRACK ABOUT WHETHER A CERTAIN EVENT HAS HAPPENED ALREADY OR NOT
-        // - DETERMINE WHAT HAPPENS AFTER THE EVENT HAS HAPPENED
-        // - IMPLEMENTS THE CONCEPT OF A FUTURE VALUE TAHT WE'RE EXPECTING
+      // PROMISE IS AN OBJECT THAT
+      // - KEEPS TRACK ABOUT WHETHER A CERTAIN EVENT HAS HAPPENED ALREADY OR NOT
+      // - DETERMINE WHAT HAPPENS AFTER THE EVENT HAS HAPPENED
+      // - IMPLEMENTS THE CONCEPT OF A FUTURE VALUE TAHT WE'RE EXPECTING
 
-        // PROMISE STATE: 
-        // - PENDING: THE EVENT HASN'T HAPPENED
-        // - SETTLED / RESOLVED: THE EVENT HAS HAPPENED: 
-        //   +, SUCCESSFUL: IF EVENT SUCCESFULLY RUN 
-        //   +, REJECTED: IF EVENT UNSUCCESSFULLY RUN  
+      // PROMISE STATE:
+      // - PENDING: THE EVENT HASN'T HAPPENED
+      // - SETTLED / RESOLVED: THE EVENT HAS HAPPENED:
+      //   +, SUCCESSFUL: IF EVENT SUCCESFULLY RUN
+      //   +, REJECTED: IF EVENT UNSUCCESSFULLY RUN
 
-        // Making example above using promise
-        // passing 2 states into the function inside promise
-        const getIDs = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                // successful then return the array
-                resolve([134,4531,4343,342]);
-                // Promise is always successful so you'll have to 
-                // comment out the resolve function to see the output of reject()
-                reject('There is an error dawg !!');
-                // Run the reject() function to return 
-                // if the function is not successful
-            }, 1500);
+      // Making example above using promise
+      // passing 2 states into the function inside promise
+      /*
+      BEGINNING OF PROMISES
+
+      const getIDs = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // successful then return the array
+          resolve([134, 4531, 4343, 342]);
+          // Promise is always successful so you'll have to
+          // comment out the resolve function to see the output of reject()
+          reject("There is an error dawg !!");
+          // Run the reject() function to return
+          // if the function is not successful
+        }, 1500);
+      });
+
+      const getRecipe = (recID) => {
+        return new Promise((resolve, reject) => {
+          setTimeout(
+            (ID) => {
+              const recipe = {
+                title: "Fresh Tomato pasta",
+                publisher: "Trung",
+              };
+              resolve(`${ID}: ${recipe.title}`);
+            },
+            1500,
+            recID
+          );
         });
+      };
 
-        const getRecipe = recID => {
-            return new Promise((resolve, reject) =>{
+      const getRelated = (publisher) => {
+        return new Promise((resolve, reject) => {
+          setTimeout(
+            (pub) => {
+              const recipe2 = {
+                title: "Italian Pizza",
+                publisher: "Nigga Please",
+              };
 
-                setTimeout((ID) => {
-                    const recipe = {
-                        title: 'Fresh Tomato pasta', 
-                        publisher: 'Trung'
-                    }; 
-                    resolve(`${ID}: ${recipe.title}`); 
-                }, 1500, recID);
-            }); 
-        };
+              resolve(`${pub}: ${recipe2.title}`);
+            },
+            1500,
+            publisher
+          );
+        });
+      };
 
-        const getRelated = (publisher) => {
-            return new Promise((resolve, reject) => {
-                setTimeout((pub) => {
-                    const recipe2 = {
-                            title: 'Italian Pizza', 
-                            publisher: 'Nigga Please'
-                        }; 
-
-                    resolve(`${pub}: ${recipe2.title}`); 
-                }, 1500, publisher);
-            });
-        };
-
-        // then() add event handler in case the event is resolved
-        // IDs will be the result of the resolve function
-        // in this case it will be the entire array
-        getIDs
+      // then() add event handler in case the event is resolved
+      // IDs will be the result of the resolve function
+      // in this case it will be the entire array
+      getIDs
         .then((IDs) => {
-            // Take the return of resolve() Function above
-            console.log(IDs); 
-            return getRecipe(IDs[2]); 
+          // Take the return of resolve() Function above
+          console.log(IDs);
+          return getRecipe(IDs[2]);
         })
-        .then(recipe => {
-            console.log(recipe); 
-            return getRelated('Trung'); 
+        .then((recipe) => {
+          console.log(recipe);
+          return getRelated("Trung");
         })
-        .then(recipe => {
-            console.log(recipe); 
+        .then((recipe) => {
+          console.log(recipe);
         })
-        .catch(error => {
-            // Take the return of reject() Function above
-            console.log(error); 
+        .catch((error) => {
+          // Take the return of reject() Function above
+          console.log(error);
         });
+          
+          END OF PROMISES
+        */
+
+      /* BEGINNING OF Async / Await 
+      const getIDs = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // successful then return the array
+          resolve([134, 4531, 4343, 342]);
+          // Promise is always successful so you'll have to
+          // comment out the resolve function to see the output of reject()
+          reject("There is an error dawg !!");
+          // Run the reject() function to return
+          // if the function is not successful
+        }, 1500);
+      });
+
+      const getRecipe = (recID) => {
+        return new Promise((resolve, reject) => {
+          setTimeout(
+            (ID) => {
+              const recipe = {
+                title: "Fresh Tomato pasta",
+                publisher: "Trung",
+              };
+              resolve(`${ID}: ${recipe.title}`);
+            },
+            1500,
+            recID
+          );
+        });
+      };
+
+      const getRelated = (publisher) => {
+        return new Promise((resolve, reject) => {
+          setTimeout(
+            (pub) => {
+              const recipe2 = {
+                title: "Italian Pizza",
+                publisher: "Nigga Please",
+              };
+
+              resolve(`${pub}: ${recipe2.title}`);
+            },
+            1500,
+            publisher
+          );
+        });
+      };
+
+      // The 'await' keyword can only be used within the 'async' function
+      async function getRecipesAW() {
+        // IDs will be the result of the resolve of the Promise of getIDs
+        const IDs = await getIDs;
+        console.log(IDs);
+        const recipe = await getRecipe(IDs[2]);
+        console.log(recipe);
+        const related = await getRelated("Trung");
+        console.log(related);
+
+        return recipe;
+      }
+
+      getRecipesAW().then((result) =>
+        console.log(`${result} is the best ever`)
+      );
+
+      END OF Async / Await
+      */
+
+      // Fetching the JSON data from https://www.metaweather.com/api/location/44418/
+      // Combine with proxy: https://api.allorigins.win/raw?url=
+      // Any JSON should be added the proxy above to be able to use
+
+      // woe is where on earth
+      function getWeather(woeid) {
+        fetch(
+          `https://api.allorigins.win/raw?url=https://www.metaweather.com/api/location/${woeid}/`
+        )
+          .then((result) => {
+            // This returning a Response object
+            console.log(result);
+            // this will return a promise
+            return result.json();
+          })
+          .then((data) => {
+            // Will see the data of result.json(); here !
+            console.log(data);
+
+            // Look in the data output, we're getting the
+            // fields from the data
+            // Getting the weather data for today !
+            const today = data.consolidated_weather[0];
+            console.log(
+              `Temperature in ${data.title} stay between ${today.min_temp} degree C - ${today.max_temp} degree C`
+            );
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
+      // getWeather(44418);
+      // getWeather(2487956);
+
+      /* END OF MAKING AJAX CALLS WITH FETCH AND PROMISES */
+
+      /*  MAKING AJAX CALL WITH FETCH AND ASYNC / AWAIT*/
+
+      async function getWeatherAW(woeid) {
+        // Try and Catch are like then() and catch() in
+        // fetch and promises above
+        try {
+          const result = await fetch(
+            `https://api.allorigins.win/raw?url=https://www.metaweather.com/api/location/${woeid}/`
+          );
+
+          const data = await result.json();
+          const today = data.consolidated_weather[0];
+          console.log(data);
+          console.log(
+            `Temperature in ${data.title} stay between ${today.min_temp} degree C - ${today.max_temp} degree C`
+          );
+
+          // Try this line of code to get the catch error
+          /*
+            console.log(
+            `Temperature in ${data.title} stay between ${tomorrow.min_temp} degree C - ${today.max_temp} degree C`
+            );
+          */
+          return data;
+        } catch (error) {
+          alert(error);
+        }
+      }
+
+      const dataLondon = getWeatherAW(44418);
+      // This will return a pending promise because it'll be
+      // executed before the async code retrieve data
+      console.log(dataLondon);
+
+      // Correct way to do it:
+      let dataLondon2;
+      getWeatherAW(44418).then((data) => {
+        dataLondon2 = data;
+        console.log(dataLondon2);
+      });
     </script>
-</body>
+  </body>
 </html>
